@@ -111,6 +111,19 @@ app.post('/upload-by-link', async (req, res) => {
     res.json(newName);
 });
 
+// app.post('/upload', (req, res) => {
+//     const uploadedFiles = [];
+//     for (let i = 0; i < req.files.length; i++) {
+//         const { path, originalname } = req.files[i];
+//         const parts = originalname.split('.');
+//         const ext = parts[parts.length - 1];
+//         const newPath = path + '.' + ext;
+//         fs.renameSync(path, newPath);
+//         uploadedFiles.push(newPath.replace('uploads/', '')); // Windows
+//     }
+//     res.json(uploadedFiles);
+// });
+
 const photosMiddleware = multer({ dest: 'uploads/' });
 app.post('/upload', photosMiddleware.array('photos', 100), (req, res) => {
     const uploadedFiles = [];
